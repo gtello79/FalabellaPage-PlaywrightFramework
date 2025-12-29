@@ -53,6 +53,13 @@ test.describe('Framework Validation Tests', () => {
     // Test with decimal
     const price4 = helpers.parsePriceToNumber('$99.50');
     expect(price4).toBe(99.50);
+    
+    // Test edge cases
+    const price5 = helpers.parsePriceToNumber('');
+    expect(price5).toBe(0);
+    
+    const price6 = helpers.parsePriceToNumber('invalid');
+    expect(price6).toBe(0);
   });
 
   test('should get current date', () => {

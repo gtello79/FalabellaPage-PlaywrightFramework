@@ -36,8 +36,14 @@ export class SearchPage extends BasePage {
    * @returns Number of product cards visible
    */
   async getProductCount(): Promise<number> {
-    await this.waitForElement(this.productCards.first());
-    return await this.productCards.count();
+    try {
+      // Wait for products with a shorter timeout
+      await this.productCards.first().waitFor({ state: 'visible', timeout: 5000 });
+      return await this.productCards.count();
+    } catch {
+      // No products found
+      return 0;
+    }
   }
 
   /**

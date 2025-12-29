@@ -37,11 +37,16 @@ export async function wait(ms: number): Promise<void> {
  * Format price string to number
  * Handles different formats like "$1.234,56" or "$1,234.56"
  * @param priceString - Price as string
- * @returns Price as number
+ * @returns Price as number, or 0 if invalid
  */
 export function parsePriceToNumber(priceString: string): number {
   // Remove currency symbols and whitespace
   let cleaned = priceString.replace(/[^0-9,.]/g, '');
+  
+  // Return 0 for empty strings
+  if (!cleaned) {
+    return 0;
+  }
   
   // If string has both separators, determine which is decimal
   const hasComma = cleaned.includes(',');
@@ -83,7 +88,9 @@ export function parsePriceToNumber(priceString: string): number {
     }
   }
   
-  return parseFloat(cleaned);
+  const result = parseFloat(cleaned);
+  // Return 0 if parsing results in NaN
+  return isNaN(result) ? 0 : result;
 }
 
 /**
