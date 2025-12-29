@@ -43,27 +43,43 @@ export function parsePriceToNumber(priceString: string): number {
   // Remove currency symbols and whitespace
   let cleaned = priceString.replace(/[^0-9,.]/g, '');
   
-  // Determine which separator is decimal based on position
-  // The decimal separator is typically the last separator
-  const lastComma = cleaned.lastIndexOf(',');
-  const lastDot = cleaned.lastIndexOf('.');
+  // If string has both separators, determine which is decimal
+  const hasComma = cleaned.includes(',');
+  const hasDot = cleaned.includes('.');
   
-  if (lastComma > lastDot) {
-    // Comma is the decimal separator (e.g., "1.234,56")
-    cleaned = cleaned.replace(/\./g, '').replace(',', '.');
-  } else if (lastDot > lastComma) {
-    // Dot is the decimal separator (e.g., "1,234.56")
-    cleaned = cleaned.replace(/,/g, '');
-  } else {
-    // No decimal separator or only one separator
-    // If length after separator is 3, it's a thousand separator, remove it
-    if (cleaned.includes('.') && cleaned.split('.')[1]?.length === 3) {
-      cleaned = cleaned.replace('.', '');
-    } else if (cleaned.includes(',') && cleaned.split(',')[1]?.length === 3) {
-      cleaned = cleaned.replace(',', '');
+  if (hasComma && hasDot) {
+    // Both separators present - the last one is the decimal separator
+    const lastComma = cleaned.lastIndexOf(',');
+    const lastDot = cleaned.lastIndexOf('.');
+    
+    if (lastComma > lastDot) {
+      // Comma is decimal separator (European format: 1.234,56)
+      cleaned = cleaned.replace(/\./g, '').replace(',', '.');
     } else {
-      // Assume it's a decimal separator, normalize to dot
+      // Dot is decimal separator (US format: 1,234.56)
+      cleaned = cleaned.replace(/,/g, '');
+    }
+  } else if (hasComma) {
+    // Only comma present
+    // Check if it's likely a decimal separator (2 digits after) or thousand separator
+    const parts = cleaned.split(',');
+    if (parts.length === 2 && parts[1].length <= 2) {
+      // Likely decimal separator (e.g., "1234,56")
       cleaned = cleaned.replace(',', '.');
+    } else {
+      // Likely thousand separator (e.g., "1,234,567")
+      cleaned = cleaned.replace(/,/g, '');
+    }
+  } else if (hasDot) {
+    // Only dot present
+    // Check if it's likely a decimal separator (2 digits after) or thousand separator
+    const parts = cleaned.split('.');
+    if (parts.length === 2 && parts[1].length <= 2) {
+      // Likely decimal separator (e.g., "1234.56")
+      // Already in correct format
+    } else {
+      // Likely thousand separator (e.g., "1.234.567")
+      cleaned = cleaned.replace(/\./g, '');
     }
   }
   
