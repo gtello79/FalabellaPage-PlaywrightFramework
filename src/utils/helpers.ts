@@ -35,15 +35,39 @@ export async function wait(ms: number): Promise<void> {
 
 /**
  * Format price string to number
- * @param priceString - Price as string (e.g., "$1.234,56")
+ * Handles different formats like "$1.234,56" or "$1,234.56"
+ * @param priceString - Price as string
  * @returns Price as number
  */
 export function parsePriceToNumber(priceString: string): number {
-  // Remove currency symbols and convert to number
-  const cleaned = priceString.replace(/[^0-9,.]/g, '');
-  // Handle different decimal separators
-  const normalized = cleaned.replace(/\./g, '').replace(',', '.');
-  return parseFloat(normalized);
+  // Remove currency symbols and whitespace
+  let cleaned = priceString.replace(/[^0-9,.]/g, '');
+  
+  // Determine which separator is decimal based on position
+  // The decimal separator is typically the last separator
+  const lastComma = cleaned.lastIndexOf(',');
+  const lastDot = cleaned.lastIndexOf('.');
+  
+  if (lastComma > lastDot) {
+    // Comma is the decimal separator (e.g., "1.234,56")
+    cleaned = cleaned.replace(/\./g, '').replace(',', '.');
+  } else if (lastDot > lastComma) {
+    // Dot is the decimal separator (e.g., "1,234.56")
+    cleaned = cleaned.replace(/,/g, '');
+  } else {
+    // No decimal separator or only one separator
+    // If length after separator is 3, it's a thousand separator, remove it
+    if (cleaned.includes('.') && cleaned.split('.')[1]?.length === 3) {
+      cleaned = cleaned.replace('.', '');
+    } else if (cleaned.includes(',') && cleaned.split(',')[1]?.length === 3) {
+      cleaned = cleaned.replace(',', '');
+    } else {
+      // Assume it's a decimal separator, normalize to dot
+      cleaned = cleaned.replace(',', '.');
+    }
+  }
+  
+  return parseFloat(cleaned);
 }
 
 /**

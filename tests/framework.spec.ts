@@ -38,11 +38,21 @@ test.describe('Framework Validation Tests', () => {
   });
 
   test('should parse price to number', () => {
+    // Test European format (dot as thousand, comma as decimal)
     const price1 = helpers.parsePriceToNumber('$1.234,56');
     expect(price1).toBe(1234.56);
     
-    const price2 = helpers.parsePriceToNumber('$999');
-    expect(price2).toBe(999);
+    // Test US format (comma as thousand, dot as decimal)
+    const price2 = helpers.parsePriceToNumber('$1,234.56');
+    expect(price2).toBe(1234.56);
+    
+    // Test simple number without thousand separator
+    const price3 = helpers.parsePriceToNumber('$999');
+    expect(price3).toBe(999);
+    
+    // Test with decimal
+    const price4 = helpers.parsePriceToNumber('$99.50');
+    expect(price4).toBe(99.50);
   });
 
   test('should get current date', () => {
