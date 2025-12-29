@@ -27,6 +27,8 @@ export function generateRandomEmail(): string {
 
 /**
  * Wait for a specified amount of time
+ * Note: Prefer Playwright's built-in waiting mechanisms when possible.
+ * This utility is provided for edge cases where explicit delays are needed.
  * @param ms - Milliseconds to wait
  */
 export async function wait(ms: number): Promise<void> {
