@@ -1,0 +1,39 @@
+{
+  "name": "falabellapage-playwrightframework",
+  "version": "1.0.0",
+  "description": "A testing framework for Falabella website using Playwright with TypeScript and Page Object Model pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project='Mobile Chrome' --project='Mobile Safari'",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "test:home": "playwright test tests/homePage.spec.ts",
+    "test:search": "playwright test tests/search.spec.ts",
+    "test:product": "playwright test tests/product.spec.ts",
+    "test:e2e": "playwright test tests/e2e.spec.ts",
+    "compile": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "testing",
+    "automation",
+    "falabella",
+    "page-object-model",
+    "e2e"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
+  }
+}
