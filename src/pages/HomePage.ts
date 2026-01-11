@@ -18,8 +18,8 @@ export class HomePage extends BasePage {
     super(page);
     // Initialize locators using data-testid, id, or other stable selectors
     this.searchBox = page.locator('input[id="testId-SearchBar-Input"]');
-    this.searchButton = page.locator('button[aria-label="Buscar"]');
-    this.logo = page.locator('a[aria-label="Falabella Home"]');
+    this.searchButton = page.locator('button.SearchBar-module_searchBtnIcon__YqTAF');
+    this.logo = page.locator('a[id="testId-logo-btn"]');
     this.categoriesMenu = page.locator('nav[aria-label="Categorías"]');
     this.shoppingCart = page.locator('a[aria-label="Carro de Compras"]');
     this.loginButton = page.locator('a[aria-label="Ingresa a tu cuenta"]');
@@ -39,6 +39,8 @@ export class HomePage extends BasePage {
    */
   async search(searchTerm: string): Promise<void> {
     await this.fill(this.searchBox, searchTerm);
+    
+    // Incluide a 
     await this.click(this.searchButton);
   }
 
