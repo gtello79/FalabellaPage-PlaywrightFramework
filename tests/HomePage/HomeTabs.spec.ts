@@ -18,16 +18,21 @@ test.describe('Validate Tabs visible in Falabella Home Page', () => {
     ];
     for (const tab of tabsTest) {
         test(`should display ${tab.name} tab on home page`, async () => {
-            homePage.validateTabVisible(tab.name).then(async (isVisible) => {
-                expect(isVisible).toBeTruthy();
-
+            await test.step(`Validate ${tab.name} tab`, async () => {
+                homePage.validateTabVisible(tab.name).then(async (isVisible) => {
+                    expect(isVisible).toBeTruthy();
+                });
             });
-            await homePage.clickTab(tab.name);
 
-            const title = await homePage.getTitle();
-            if (tab.titlePage) {
+            await test.step(`Click ${tab.name} tab and validate navigation`, async () => {
+                await homePage.clickTab(tab.name);
+            });
+            
+            
+            await test.step(`Validate navigation to ${tab.name} page`, async () => {
+                const title = await homePage.getTitle();
                 expect(title).toContain(tab.titlePage);
-            }
+            });
 
         });
     }
