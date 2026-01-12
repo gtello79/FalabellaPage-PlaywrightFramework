@@ -30,10 +30,10 @@ export class HomePage extends BasePage {
     this.shoppingCart = page.locator('a[aria-label="Carro de Compras"]');
     this.loginButton = page.locator('a[aria-label="Ingresa a tu cuenta"]');
 
-    this.schoolTab = page.locator('text=Escolar');
-    this.offersTab = page.locator('text=Ofertas');
-    this.arrivesTodayTab = page.locator('text=Llega Hoy');
-    this.pickUpIn90MinTab = page.locator('text=Retira desde 90min');
+    this.schoolTab = page.getByRole('link', { name: 'Escolares', exact: true });
+    this.offersTab = page.getByRole('link', { name: 'Ofertas' });
+    this.arrivesTodayTab = page.getByRole('link', { name: 'Llega Hoy' });
+    this.pickUpIn90MinTab = page.getByRole('link', { name: 'Retira desde 90min' });
   }
 
   /**
