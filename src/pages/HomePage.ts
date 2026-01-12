@@ -14,6 +14,12 @@ export class HomePage extends BasePage {
   readonly shoppingCart: Locator;
   readonly loginButton: Locator;
 
+  // Tabs available in the pags
+  readonly schoolTab: Locator;
+  readonly offersTab: Locator
+  readonly arrivesTodayTab: Locator;
+  readonly pickUpIn90MinTab: Locator;
+
   constructor(page: Page) {
     super(page);
     // Initialize locators using data-testid, id, or other stable selectors
@@ -23,6 +29,11 @@ export class HomePage extends BasePage {
     this.categoriesMenu = page.locator('nav[aria-label="Categorías"]');
     this.shoppingCart = page.locator('a[aria-label="Carro de Compras"]');
     this.loginButton = page.locator('a[aria-label="Ingresa a tu cuenta"]');
+
+    this.schoolTab = page.locator('text=Escolar');
+    this.offersTab = page.locator('text=Ofertas');
+    this.arrivesTodayTab = page.locator('text=Llega Hoy');
+    this.pickUpIn90MinTab = page.locator('text=Retira desde 90min');
   }
 
   /**
@@ -97,5 +108,36 @@ export class HomePage extends BasePage {
   async navigateToCategory(categoryName: string): Promise<void> {
     const categoryLink = this.page.locator(`a:has-text("${categoryName}")`);
     await this.click(categoryLink);
+  }
+
+  async validateTabVisible(tabName: string): Promise<boolean> {
+    switch (tabName) {
+      case 'Ofertas':
+        return await this.isVisible(this.offersTab);
+      case 'Escolar':
+        return await this.isVisible(this.schoolTab);
+      case 'Llega Hoy':
+        return await this.isVisible(this.arrivesTodayTab);
+      case 'Retira en 90min':
+        return await this.isVisible(this.pickUpIn90MinTab);
+    }
+    return false;
+  }
+
+  async clickTab(tabName: string): Promise<void> {
+    switch (tabName) {
+      case 'Ofertas':
+        await this.click(this.offersTab);
+        break;
+      case 'Escolar':
+        await this.click(this.schoolTab);
+        break;
+      case 'Llega Hoy':
+        await this.click(this.arrivesTodayTab);
+        break;
+      case 'Retira en 90min':
+        await this.click(this.pickUpIn90MinTab);
+        break;
+    }
   }
 }
