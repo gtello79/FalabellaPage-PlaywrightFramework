@@ -20,6 +20,8 @@ export class HomePage extends BasePage {
   readonly arrivesTodayTab: Locator;
   readonly pickUpIn90MinTab: Locator;
 
+  readonly weddingTab: Locator;
+
   constructor(page: Page) {
     super(page);
     // Initialize locators using data-testid, id, or other stable selectors
@@ -34,6 +36,7 @@ export class HomePage extends BasePage {
     this.offersTab = page.getByRole('link', { name: 'Ofertas' });
     this.arrivesTodayTab = page.getByRole('link', { name: 'Llega Hoy' });
     this.pickUpIn90MinTab = page.getByRole('link', { name: 'Retira desde 90min' });
+    this.weddingTab = page.locator("a#testId-extra-links-2");
   }
 
   /**
@@ -78,6 +81,10 @@ export class HomePage extends BasePage {
     await this.click(this.shoppingCart);
   }
 
+  async goToWeddingTab(): Promise<void> {
+    await this.click(this.weddingTab);
+  }
+
   /**
    * Click on login button
    */
@@ -91,6 +98,10 @@ export class HomePage extends BasePage {
    */
   async isSearchBoxVisible(): Promise<boolean> {
     return await this.isVisible(this.searchBox);
+  }
+
+  async isWeddingTabVisible(): Promise<boolean> {
+    return await this.isVisible(this.weddingTab);
   }
 
   /**

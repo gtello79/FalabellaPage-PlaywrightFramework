@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
-import { HomePage } from '../../src/pages/HomePage';
+import { HomePage } from '../../../src/pages/HomePage';
 
 test.describe('Falabella Home Page ', () => {
     let homePage: HomePage;
@@ -58,5 +58,15 @@ test.describe('Falabella Home Page ', () => {
         // Verify we're on home page
         const currentURL = await homePage.getCurrentURL();
         expect(currentURL).toMatch(/.*falabella\.com(\/falabella-cl)?$/);
+    });
+
+    test('Should validate Wedding Page is available', async () => {
+        await homePage.isWeddingTabVisible().then(async (isVisible) => {
+            expect(isVisible).toBeTruthy();
+        });
+    
+        // Verify that the search box is visible
+        await homePage.goToWeddingTab();
+
     });
 });

@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
-import { HomePage } from '../../src/pages';
+import { HomePage } from '../../../src/pages';
 
 test.describe('Validate Tabs visible in Falabella Home Page', () => {
     let homePage: HomePage;

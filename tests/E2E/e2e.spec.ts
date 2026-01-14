@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../src/pages/HomePage';
-import { SearchPage } from '../src/pages/SearchPage';
-import { ProductPage } from '../src/pages/ProductPage';
+import { HomePage } from '../../src/pages/HomePage';
+import { SearchPage } from '../../src/pages/SearchPage';
+import { ProductPage } from '../../src/pages/ProductPage';
 
 /**
  * End-to-end test suite for Falabella
