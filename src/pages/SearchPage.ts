@@ -21,7 +21,7 @@ export class SearchPage extends BasePage {
     super(page);
     // Initialize locators for search results page
     this.searchResults = page.locator('[data-testid="search-results"]');
-    this.productCards = page.locator('[data-testid="pod-card"], .pod-card, .search-results-list .pod');
+    this.productCards = page.locator('#testId-searchResults-products a[data-pod="catalyst-pod"]').filter({ has: page.locator('img') });
     this.sortDropdown = page.locator('select[id="sort-by"], [data-testid="sort-dropdown"]');
     this.filtersPanel = page.locator('[data-testid="filters-panel"], .filters-container');
     this.priceFilter = page.locator('[data-testid="price-filter"], .price-filter');
@@ -29,6 +29,7 @@ export class SearchPage extends BasePage {
     this.pagination = page.locator('[data-testid="pagination"], .pagination');
     this.resultsCount = page.locator('[data-testid="results-count"], .results-count');
     this.noResultsMessage = page.locator('[data-testid="no-results"], .no-results-message');
+    
   }
 
   /**
@@ -69,7 +70,7 @@ export class SearchPage extends BasePage {
    * @returns The product name or null
    */
   async getFirstProductName(): Promise<string | null> {
-    const firstProduct = this.productCards.first();
+    const firstProduct = this.page.getByRole('listitem').filter({ hasText: "mouse"}).first();
     await this.waitForElement(firstProduct);
     return await this.getText(firstProduct);
   }

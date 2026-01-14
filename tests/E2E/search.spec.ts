@@ -52,9 +52,6 @@ test.describe('Falabella Search Tests', () => {
     // Click on first product
     await searchPage.clickProductByIndex(0);
     
-    // Wait for product page to load
-    await page.waitForLoadState('networkidle');
-    
     // Verify we navigated to a product page
     const currentURL = await searchPage.getCurrentURL();
     expect(currentURL).toContain('product');

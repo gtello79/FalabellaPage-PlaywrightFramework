@@ -26,6 +26,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     /* Video on failure */
     video: 'retain-on-failure',
+    testIdAttribute: 'testId'
   },
 
   /* Configure projects for major browsers */
@@ -34,5 +35,6 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+
   ],
 });
