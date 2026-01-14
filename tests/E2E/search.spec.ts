@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../src/pages/HomePage';
-import { SearchPage } from '../src/pages/SearchPage';
+import { HomePage } from '../../src/pages/HomePage';
+import { SearchPage } from '../../src/pages/SearchPage';
 
 /**
  * Test suite for Falabella Search functionality

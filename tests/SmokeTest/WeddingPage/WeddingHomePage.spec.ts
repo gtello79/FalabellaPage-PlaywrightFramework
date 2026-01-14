@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
-import { HomePage } from '../../src/pages';
-import { WeddingHomePage } from '../../src/pages/WeddingHomePage';
+import { HomePage } from '../../../src/pages/HomePage';
+import { WeddingHomePage } from '../../../src/pages/WeddingHomePage';
 
 test.describe('Validate Falabella Wedding Page ', () => {
     let homePage: HomePage;
