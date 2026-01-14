@@ -33,7 +33,7 @@ jobs:
       run: npm run compile
       
     - name: Run framework validation tests
-      run: npm test tests/framework.spec.ts
+      run: npm test
       
     # Uncomment the following steps when running in an environment with internet access
     # - name: Run all tests
