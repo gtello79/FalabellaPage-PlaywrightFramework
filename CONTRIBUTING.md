@@ -14,7 +14,7 @@ Thank you for your interest in contributing! This document provides guidelines a
 
 ### Before Making Changes
 
-1. Ensure all tests pass: `npm test tests/framework.spec.ts`
+1. Ensure all tests pass: `npm test `
 2. Check TypeScript compilation: `npm run compile`
 
 ### Making Changes
