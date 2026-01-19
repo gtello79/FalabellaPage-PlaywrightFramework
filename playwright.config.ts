@@ -35,6 +35,12 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'FalabellaWeddingPage',
+      use: { ...devices['Desktop Chrome'] },
+      testDir: './tests/SmokeTest/WeddingPage',
+      retries: 1,
+    }
 
   ],
 });

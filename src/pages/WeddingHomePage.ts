@@ -11,6 +11,7 @@ export class WeddingHomePage {
   readonly conveniosSection: Locator;
   readonly conveniosTitle: Locator;
   readonly celebrationSection: Locator;
+  readonly weddingPageLogo: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,6 +19,7 @@ export class WeddingHomePage {
     this.conveniosSection = page.locator('#section-convenios');
     this.conveniosTitle = page.locator('h2', { hasText: 'Los mejores Convenios' });
     this.celebrationSection = page.getByRole('button', { name: "carousel indicator 1" });
+    this.weddingPageLogo = page.getByRole('img').first();
   }
 
   async navigateTo(): Promise<void> {
@@ -26,6 +28,11 @@ export class WeddingHomePage {
 
   async getTitle(): Promise<string> {
     return this.page.title();
+  }
+
+  async validateLogoIsVisible(): Promise<void> {
+    const logo = this.weddingPageLogo;
+    await expect(logo).toBeVisible();
   }
 
   async validateTitle(): Promise<void> {
