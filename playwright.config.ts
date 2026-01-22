@@ -35,8 +35,9 @@ export default defineConfig({
 				screenshot: 'only-on-failure',
 				/* Video on failure */
 				video: 'retain-on-failure',
-				testIdAttribute: 'testId'
+				testIdAttribute: 'testId',
 			},
+			testDir: './tests/SmokeTest/HomePage',
 		},
 		{
 			name: 'FalabellaWeddingPage',

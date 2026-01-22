@@ -33,12 +33,11 @@ jobs:
       run: npm run compile
       
     - name: Run framework validation tests
-      run: npm test
-      
-    # Uncomment the following steps when running in an environment with internet access
-    # - name: Run all tests
-    #   run: npm test
-    
+      run: npm run test:chromium
+
+    - name: Run Falabella Wedding Page tests
+      run: npm run test:weddingpage
+
     - name: Upload test results
       uses: actions/upload-artifact@v4
       if: always()
